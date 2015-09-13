@@ -131,6 +131,8 @@ Player.prototype.render = function() {
 Player.prototype.reset = function(){
 	this.x = 200;
 	this.y = 400;
+	tokenCollection = [];
+	TokensArray();
 }
 
 Player.prototype.liveNumberDown = function() {
@@ -163,15 +165,55 @@ Player.prototype.handleInput = function(key) {
 	}
 }
 
+var Tokens = function(image, x, y) {
+	//position
+	this.x = x;
+	this.y = y;
+	this.sprite = image;
+};
+
+Tokens.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Tokens.prototype.getTokens = function() {
+    //here detect collection
+    var playerX = player.x;
+    var playerY = player.y;
+    var itemX = this.x;
+    var itemY = this.y;
+    if (Math.abs(itemX - playerX) < player.width &&
+        Math.abs(itemY - playerY) < player.height) {
+        tokenCollection.splice(tokenCollection.indexOf(this), 1);
+    	// 20 Points for each token collected
+    	scoreKeeper = scoreKeeper + 20;
+        if (tokenCollection.length === 0) {
+            console.log('Good job collecting all the tokens!');
+            /*reset game*/
+            player.reset();
+        }
+    }
+};
+
 
 // Instantiate all objects
-var allEnemies = [
-	enemy = new Enemy(),
-	enemy2 = new Enemy(),
-	enemy3 = new Enemy()
-];
+var allEnemies = [];
+
+setInterval(function() {
+	allEnemies.push(new Enemy());
+}, 5000);
 
 var player = new Player();
+
+var tokenCollection = [];
+
+var TokensArray = function () {
+    tokenCollection.push(new Tokens('images/Gem Orange.png', 100, 50));
+    tokenCollection.push(new Tokens('images/Gem Green.png', 100, 200));
+    tokenCollection.push(new Tokens('images/Gem Blue.png', 100, 50));
+    tokenCollection.push(new Tokens('images/Key.png', 400, 200));
+};
+TokensArray();
 
 
 // This listens for key presses and sends the keys to your
