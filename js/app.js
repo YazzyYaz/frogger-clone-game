@@ -6,7 +6,6 @@
 
 // NOTE: This file has been modified from the original
 // Udacity repository: https://github.com/udacity/frontend-nanodegree-arcade-game
-// Some methods have been inspired by this repository: https://github.com/akboada/arcade-game
 
 //
 // Global Variables
@@ -175,8 +174,14 @@ Player.prototype.handleInput = function(key) {
 //
 
 var Tokens = function(image, x, y) {
-	this.x = x;
-	this.y = y;
+
+	function getRandomTokenPosition(min, max) {
+		return Math.floor(Math.random() * max) + min;
+	};
+	var randomVal = getRandomTokenPosition(30, 250);
+
+	this.x = x + randomVal;
+	this.y = y + randomVal;
 	this.sprite = image;
 };
 
@@ -197,8 +202,6 @@ Tokens.prototype.getTokens = function() {
 		scoreKeeper = scoreKeeper + 20;
 		if (tokenCollection.length === 0) {
 			console.log('Good job collecting all the tokens!');
-			/*reset game*/
-			player.reset();
 		}
 	}
 };
@@ -215,12 +218,12 @@ var player = new Player();
 
 var tokenCollection = [];
 
-// TO DO: Randomize location of the Tokens
+
 var TokensArray = function () {
-	tokenCollection.push(new Tokens('images/Gem Orange.png', 100, 50));
-	tokenCollection.push(new Tokens('images/Gem Green.png', 100, 200));
-	tokenCollection.push(new Tokens('images/Gem Blue.png', 100, 50));
-	tokenCollection.push(new Tokens('images/Key.png', 400, 200));
+	tokenCollection.push(new Tokens('images/Gem Orange.png', 10, 10));
+	tokenCollection.push(new Tokens('images/Gem Green.png', 10, 10));
+	tokenCollection.push(new Tokens('images/Gem Blue.png', 10, 10));
+	tokenCollection.push(new Tokens('images/Key.png', 20, 20));
 };
 TokensArray();
 
