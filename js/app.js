@@ -4,6 +4,9 @@
 	Date: September 2015
 */
 
+// NOTE: This file has been modified from the original
+// Udacity repository: https://github.com/udacity/frontend-nanodegree-arcade-game
+
 //
 // Global Variables
 //
@@ -136,7 +139,7 @@ Player.prototype.reset = function(){
 }
 
 Player.prototype.liveNumberDown = function() {
-    liveNumber--;
+	liveNumber--;
 };
 
 // Move player according to key input
@@ -161,38 +164,42 @@ Player.prototype.handleInput = function(key) {
 			}
 			break;
 		default:
-			console.log('Play with your arrow keys!')
+			console.log('Let us cross to the river!')
 	}
 }
 
+
+//
+//  Token Class
+//
+
 var Tokens = function(image, x, y) {
-	//position
 	this.x = x;
 	this.y = y;
 	this.sprite = image;
 };
 
 Tokens.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Tokens.prototype.getTokens = function() {
-    //here detect collection
-    var playerX = player.x;
-    var playerY = player.y;
-    var itemX = this.x;
-    var itemY = this.y;
-    if (Math.abs(itemX - playerX) < player.width &&
-        Math.abs(itemY - playerY) < player.height) {
-        tokenCollection.splice(tokenCollection.indexOf(this), 1);
-    	// 20 Points for each token collected
-    	scoreKeeper = scoreKeeper + 20;
-        if (tokenCollection.length === 0) {
-            console.log('Good job collecting all the tokens!');
-            /*reset game*/
-            player.reset();
-        }
-    }
+	// Collision Detection
+	var playerX = player.x;
+	var playerY = player.y;
+	var itemX = this.x;
+	var itemY = this.y;
+	if (Math.abs(itemX - playerX) < player.width &&
+		Math.abs(itemY - playerY) < player.height) {
+		tokenCollection.splice(tokenCollection.indexOf(this), 1);
+		// 20 Points for each token collected
+		scoreKeeper = scoreKeeper + 20;
+		if (tokenCollection.length === 0) {
+			console.log('Good job collecting all the tokens!');
+			/*reset game*/
+			player.reset();
+		}
+	}
 };
 
 
@@ -207,11 +214,12 @@ var player = new Player();
 
 var tokenCollection = [];
 
+// TO DO: Randomize location of the Tokens
 var TokensArray = function () {
-    tokenCollection.push(new Tokens('images/Gem Orange.png', 100, 50));
-    tokenCollection.push(new Tokens('images/Gem Green.png', 100, 200));
-    tokenCollection.push(new Tokens('images/Gem Blue.png', 100, 50));
-    tokenCollection.push(new Tokens('images/Key.png', 400, 200));
+	tokenCollection.push(new Tokens('images/Gem Orange.png', 100, 50));
+	tokenCollection.push(new Tokens('images/Gem Green.png', 100, 200));
+	tokenCollection.push(new Tokens('images/Gem Blue.png', 100, 50));
+	tokenCollection.push(new Tokens('images/Key.png', 400, 200));
 };
 TokensArray();
 

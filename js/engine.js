@@ -1,3 +1,14 @@
+/*
+	Author: Yaz Khoury
+	Title: Frogger Clone Game
+	Date: September 2015
+*/
+
+// NOTE: This file has been modified from the original
+// Udacity repository: https://github.com/udacity/frontend-nanodegree-arcade-game
+
+
+
 /* Engine.js
  * This file provides the game loop functionality (update entities and render),
  * draws the initial game board on the screen, and then calls the update and
@@ -82,8 +93,8 @@ var Engine = (function(global) {
 		updateEntities(dt);
 		// checkCollisions();
 		tokenCollection.forEach(function (item) {
-            item.getTokens();
-        });
+			item.getTokens();
+		});
 	}
 
 	/* This is called by the update function  and loops through all of the
@@ -158,8 +169,8 @@ var Engine = (function(global) {
 		player.render();
 
 		tokenCollection.forEach(function (item) {
-            item.render();
-        });
+			item.render();
+		});
 	}
 
 	/* This function does nothing but it could have been a good place to
@@ -181,9 +192,9 @@ var Engine = (function(global) {
 		'images/enemy-bug.png',
 		'images/char-boy.png',
 		'images/Key.png',
-        'images/Gem Green.png',
-        'images/Gem Blue.png',
-        'images/Gem Orange.png'
+		'images/Gem Green.png',
+		'images/Gem Blue.png',
+		'images/Gem Orange.png'
 	]);
 	Resources.onReady(init);
 
