@@ -81,6 +81,9 @@ var Engine = (function(global) {
 	function update(dt) {
 		updateEntities(dt);
 		// checkCollisions();
+		tokenCollection.forEach(function (item) {
+            item.getTokens();
+        });
 	}
 
 	/* This is called by the update function  and loops through all of the
@@ -153,6 +156,10 @@ var Engine = (function(global) {
 		});
 
 		player.render();
+
+		tokenCollection.forEach(function (item) {
+            item.render();
+        });
 	}
 
 	/* This function does nothing but it could have been a good place to
@@ -172,7 +179,11 @@ var Engine = (function(global) {
 		'images/water-block.png',
 		'images/grass-block.png',
 		'images/enemy-bug.png',
-		'images/char-boy.png'
+		'images/char-boy.png',
+		'images/Key.png',
+        'images/Gem Green.png',
+        'images/Gem Blue.png',
+        'images/Gem Orange.png'
 	]);
 	Resources.onReady(init);
 
