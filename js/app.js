@@ -33,10 +33,6 @@ var Enemy = function() {
 	this.x = -100;
 	this.y = yPosition();
 
-	// Enemy height and width
-	this.height = 50;
-	this.width = 50;
-
 	// Function for random speed generator
 	function getRandomSpeed(min, max) {
 		return Math.floor(Math.random() * max) + min;
@@ -52,13 +48,16 @@ Enemy.prototype.update = function(dt) {
 	// Multiply movement by dt parameter, ensuring game runs the same speed on all computers.
 	this.x += this.speed * dt;
 
+	var playerX = player.x;
+	var playerY = player.y;
+	var enemyX = this.x;
+	var enemyY = this.y;
+
 	// Collision detection
-	if (this.x < player.x + player.width &&
-		this.x + this.width > player.x &&
-		this.y < player.y + player.height &&
-		this.height + this.y > player.y) {
+	if (Math.abs(enemyX - playerX) < player.width &&
+		Math.abs(enemyY - playerY) < player.height) {
 		player.reset();
-		liveNumber--;
+		player.liveNumberDown();
 	}
 
 	// Reseting after reaching edge
@@ -133,6 +132,10 @@ Player.prototype.reset = function(){
 	this.x = 200;
 	this.y = 400;
 }
+
+Player.prototype.liveNumberDown = function() {
+    liveNumber--;
+};
 
 // Move player according to key input
 Player.prototype.handleInput = function(key) {
