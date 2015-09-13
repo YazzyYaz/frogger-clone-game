@@ -6,6 +6,7 @@
 
 // NOTE: This file has been modified from the original
 // Udacity repository: https://github.com/udacity/frontend-nanodegree-arcade-game
+// Some methods have been inspired by this repository: https://github.com/akboada/arcade-game
 
 //
 // Global Variables
