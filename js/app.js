@@ -11,10 +11,10 @@
 // Global Variables
 //
 
-var arcadeWidth = 400;
-var arcadeHeight = 400;
-var liveNumber = 5;
-var scoreKeeper = 0;
+var ARCADE_WIDTH = 400;
+var ARCADE_HEIGHT = 400;
+var LIVE_NUMBER = 5;
+var SCORE_KEEPER = 0;
 
 
 //
@@ -27,10 +27,10 @@ var Enemy = function() {
 	this.sprite = 'images/enemy-bug.png';
 
 	// Function for randomizing enemy initial position
-	var yPosition = function() {
+	function yPosition() {
 		var y = [50, 150, 225];
 		return y[Math.floor(Math.random() * y.length)];
-	};
+	}
 
 	// Enemy initial coordinates
 	this.x = -100;
@@ -39,7 +39,7 @@ var Enemy = function() {
 	// Function for random speed generator
 	function getRandomSpeed(min, max) {
 		return Math.floor(Math.random() * max) + min;
-	};
+	}
 
 	this.speed = getRandomSpeed(80,200);
 
@@ -60,11 +60,11 @@ Enemy.prototype.update = function(dt) {
 	if (Math.abs(enemyX - playerX) < player.width &&
 		Math.abs(enemyY - playerY) < player.height) {
 		player.reset();
-		player.liveNumberDown();
+		player.LIVE_NUMBERDown();
 	}
 
 	// Reseting after reaching edge
-	if (this.x > arcadeWidth + 100){
+	if (this.x > ARCADE_WIDTH + 100){
 		this.reset();
 	}
 
@@ -103,13 +103,13 @@ Player.prototype.update = function(){
 
 	if (this.y <= 3){
 		this.reset();
-		scoreKeeper++;
+		SCORE_KEEPER++;
 	}
 
-	if (liveNumber < 1){
+	if (LIVE_NUMBER < 1){
 		console.log('Game Over');
-		liveNumber = 5;
-		scoreKeeper = 0;
+		LIVE_NUMBER = 5;
+		SCORE_KEEPER = 0;
 	}
 };
 
@@ -123,12 +123,12 @@ Player.prototype.render = function() {
 
 	//Score Counter Text
 	ctx.fillText('Score:', 85, 85);
-	ctx.fillText(scoreKeeper, 60, 115);
+	ctx.fillText(SCORE_KEEPER, 60, 115);
 
 	//Lives Counter Text
 	ctx.fillText('Lives:', 485, 85);
-	ctx.fillText(liveNumber, 460, 115);
-}
+	ctx.fillText(LIVE_NUMBER, 460, 115);
+};
 
 // Reset player position
 Player.prototype.reset = function(){
@@ -136,10 +136,10 @@ Player.prototype.reset = function(){
 	this.y = 400;
 	tokenCollection = [];
 	TokensArray();
-}
+};
 
-Player.prototype.liveNumberDown = function() {
-	liveNumber--;
+Player.prototype.LIVE_NUMBERDown = function() {
+	LIVE_NUMBER--;
 };
 
 // Move player according to key input
@@ -149,7 +149,7 @@ Player.prototype.handleInput = function(key) {
 			this.y = this.y - this.speed;
 			break;
 		case 'down':
-			if (this.y < arcadeHeight) {
+			if (this.y < ARCADE_HEIGHT) {
 				this.y = this.y + this.speed;
 			}
 			break;
@@ -159,14 +159,14 @@ Player.prototype.handleInput = function(key) {
 			}
 			break;
 		case 'right':
-			if (this.x < arcadeWidth){
+			if (this.x < ARCADE_WIDTH){
 			this.x = this.x + this.speed;
 			}
 			break;
 		default:
-			console.log('Let us cross to the river!')
+			console.log('Let us cross to the river!');
 	}
-}
+};
 
 
 //
@@ -177,7 +177,7 @@ var Tokens = function(image, x, y) {
 
 	function getRandomTokenPosition(min, max) {
 		return Math.floor(Math.random() * max) + min;
-	};
+	}
 	var randomVal = getRandomTokenPosition(30, 250);
 
 	this.x = x + randomVal;
@@ -199,7 +199,7 @@ Tokens.prototype.getTokens = function() {
 		Math.abs(itemY - playerY) < player.height) {
 		tokenCollection.splice(tokenCollection.indexOf(this), 1);
 		// 20 Points for each token collected
-		scoreKeeper = scoreKeeper + 20;
+		SCORE_KEEPER = SCORE_KEEPER + 20;
 		if (tokenCollection.length === 0) {
 			console.log('Good job collecting all the tokens!');
 		}
