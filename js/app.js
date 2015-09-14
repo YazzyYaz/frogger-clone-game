@@ -4,9 +4,6 @@
 	Date: September 2015
 */
 
-// NOTE: This file has been modified from the original
-// Udacity repository: https://github.com/udacity/frontend-nanodegree-arcade-game
-
 //
 // Global Variables
 //
@@ -178,7 +175,10 @@ var Tokens = function(image, x, y) {
 	function getRandomTokenPosition(min, max) {
 		return Math.floor(Math.random() * max) + min;
 	}
-	var randomVal = getRandomTokenPosition(30, 250);
+
+	var magicNumber1 = 30;
+	var magicNumber2 = 250;
+	var randomVal = getRandomTokenPosition(magicNumber1, magicNumber2);
 
 	this.x = x + randomVal;
 	this.y = y + randomVal;
@@ -218,12 +218,20 @@ var player = new Player();
 
 var tokenCollection = [];
 
+var tokenImages = [
+	'images/Gem Orange.png',
+	'images/Gem Green.png',
+	'images/Gem Blue.png',
+	'images/Key.png'
+];
+
+var tokenMagicNumber1 = 10;
+var tokenMagicNumber2 = 20;
 
 var TokensArray = function () {
-	tokenCollection.push(new Tokens('images/Gem Orange.png', 10, 10));
-	tokenCollection.push(new Tokens('images/Gem Green.png', 10, 10));
-	tokenCollection.push(new Tokens('images/Gem Blue.png', 10, 10));
-	tokenCollection.push(new Tokens('images/Key.png', 20, 20));
+	for (var toke = 0; toke < tokenImages.length; toke++){
+		tokenCollection.push(new Tokens(tokenImages[toke], tokenMagicNumber1, tokenMagicNumber2))
+	};
 };
 TokensArray();
 
