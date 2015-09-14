@@ -2,6 +2,7 @@
 
 This is a modified version of the classic Frogger Game, where the player must avoid the enemy as they cross
 towards the water. The following is a preview of the game you'll come to play.
+
 ![alt yoogler preview](images/game-preview-img.jpg)
 
 
